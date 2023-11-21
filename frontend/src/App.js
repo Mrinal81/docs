@@ -10,7 +10,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 // Function to fetch doctors
 const fetchDoctors = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/api/doctors`);
+    const response = await axios.get(`${backendUrl}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching doctors:', error);
