@@ -7,11 +7,9 @@ const PORT = process.env.PORT || 3001;
 
 // Enable CORS
 app.use(cors({
-    origin: '*',
-    methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
-    exposeHeaders: 'WWW-Authenticate, Server-Authorization',
-    credentials: true,
+    origin: 'https://docs-frontend-pi.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 // Parse JSON request bodies
