@@ -1,6 +1,5 @@
 const express = require('express');
 const faker = require('faker');
-const cors = require('cors');
 
 
 const router = express.Router();
@@ -30,7 +29,7 @@ const generateDoctors = () => {
 };
 
 // Endpoint to get the list of doctors
-router.get('/', cors(), (req, res) => {
+router.get('/', (req, res) => {
     const doctors = generateDoctors();
     res.json(doctors);
 });
