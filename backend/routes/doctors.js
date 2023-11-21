@@ -1,5 +1,7 @@
 const express = require('express');
-const faker = require('faker'); // Make sure you have this package installed
+const faker = require('faker');
+const cors = require('cors');
+
 
 const router = express.Router();
 
@@ -28,7 +30,7 @@ const generateDoctors = () => {
 };
 
 // Endpoint to get the list of doctors
-router.get('/', (req, res) => {
+router.get('/', cors(), (req, res) => {
     const doctors = generateDoctors();
     res.json(doctors);
 });
