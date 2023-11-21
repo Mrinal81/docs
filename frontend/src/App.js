@@ -5,7 +5,7 @@ import DoctorList from './components/DoctorList';
 import axios from 'axios';
 import './App.css';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001'; // Default to local backend
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 // Function to fetch doctors
 const fetchDoctors = async () => {
