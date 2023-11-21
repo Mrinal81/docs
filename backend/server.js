@@ -6,10 +6,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Enable CORS
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-    next();
-});
+app.use(cors({
+    origin: '*',
+    methods: 'GET,POST,PUT,DELETE',
+    allowedHeaders: 'Content-Type, Authorization, X-Requested-With',
+    exposeHeaders: 'WWW-Authenticate, Server-Authorization',
+    credentials: true,
+}));
 
 // Parse JSON request bodies
 app.use(express.json());
