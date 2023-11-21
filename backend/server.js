@@ -1,40 +1,20 @@
-// backend/server.js
 const express = require('express');
-const faker = require('faker');
+const cors = require('cors');
+const doctorsRouter = require('./routes/doctors');
 
 const app = express();
-const port = 3001;
+const PORT = process.env.PORT || 3001;
 
-const generateDoctors = () => {
-    const doctors = [];
+// Enable CORS
+app.use(cors());
 
-    const roles = ['Cardiologist', 'Dermatologist', 'Gynecologist'];
+// Parse JSON request bodies
+app.use(express.json());
 
-    for (let i = 1; i <= 20; i++) {
-        doctors.push({
-            id: i,
-            name: `Dr. ${faker.name.firstName()}`,
-            role: faker.random.arrayElement(roles),
-            exp: faker.random.number({ min: 1, max: 30 }),
-            place: `${faker.address.city()}, ${faker.address.state()}`,
-            clinic: faker.company.companyName(),
-            fees: faker.random.number({ min: 100, max: 500 }),
-            rating: faker.random.number({ min: 0, max: 100 }),
-            stories: faker.random.number({ min: 1, max: 50 }),
-            available: faker.random.arrayElement(['Available Today', 'Not Available']),
-            img: `https://i.pravatar.cc/150?img=${i}`,
-        });
-    }
+// Routes
+app.use('/api/doctors', doctorsRouter);
 
-    return doctors;
-};
-
-const doctors = generateDoctors();
-
-app.get('/api/doctors', (req, res) => {
-    res.json(doctors);
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
