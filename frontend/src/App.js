@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import CategoryList from './components/CategoryList';
 import DoctorList from './components/DoctorList';
 import axios from 'axios';
 import './App.css';
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3001'; // Default to local backend
 
-
-
-
+// Function to fetch doctors
+const fetchDoctors = async () => {
+  try {
+    const response = await axios.get(`${backendUrl}/api/doctors`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching doctors:', error);
+    return [];
+  }
+};
 
 const App = () => {
   const [doctors, setDoctors] = useState([]);
 
-
   useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/api/doctors');
-        setDoctors(response.data);
-      } catch (error) {
-        console.error('Error fetching doctors:', error);
-      }
+    const fetchData = async () => {
+      const doctorsData = await fetchDoctors();
+      setDoctors(doctorsData);
     };
 
-    fetchDoctors();
+    fetchData();
   }, []);
-  console.log('Doctors:', doctors);
-
 
   return (
     <Router>
@@ -51,6 +52,5 @@ const App = () => {
     </Router>
   );
 };
-
 
 export default App;
